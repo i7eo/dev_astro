@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const pageTitle = "标签索引";
+// const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+// const allPosts = await Astro.glob('../posts/*.md');
+const allPosts = await getCollection("blog");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+---
+
+<Layout title={pageTitle}>
+  <div class="flex flex-wrap">
+    {tags.map((tag) => (
+      <p class="m-1 py-2 px-1 rounded-1 border-dotted border border-slate-600"><a href={`/tags/${tag}`}>{tag}</a></p>
+    ))}
+  </div>
+</Layout>

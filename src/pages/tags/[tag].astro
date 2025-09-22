@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+
+// export async function getStaticPaths() {
+//   const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
+
+//   return [
+//     {params: {tag: "astro"}, props: {posts: allPosts}},
+//     {params: {tag: "successes"}, props: {posts: allPosts}},
+//     {params: {tag: "community"}, props: {posts: allPosts}},
+//     {params: {tag: "blogging"}, props: {posts: allPosts}},
+//     {params: {tag: "setbacks"}, props: {posts: allPosts}},
+//     {params: {tag: "learning in public"}, props: {posts: allPosts}}
+//   ];
+// }
+// const filteredPosts = posts.filter((post: any) => post.frontmatter.tags?.includes(tag));
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("blog");
+  const uniqueTags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<Layout title={tag}>
+  <p>包含「{tag}」标签的文章</p>
+  <ul>
+    {posts.map((post: any) => <li><a href={`/posts/${post.id}`}>{post.data.title}</a></li>)}
+  </ul>
+</Layout>
