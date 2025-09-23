@@ -44,3 +44,10 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Ref
+
+1. [astro + react](https://neon.com/guides/chatbot-astro-postgres-llamaindex#build-conversation-user-interface-using-vercel-ai-sdk)
+2. [astro ai chat](https://jherr2020.medium.com/insanely-easy-local-first-ai-chatbot-with-astro-ollama-and-vercels-ai-library-7b087ce032dc)
+3. [vercel ai sdk](https://ai-sdk.dev/docs/getting-started/nuxt)
+4. [vercel ai sdk guide](https://juejin.cn/post/7376622203301969959)
